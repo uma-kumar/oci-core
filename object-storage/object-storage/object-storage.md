@@ -1,4 +1,4 @@
-# Create an Object Storage Service
+# Create an Object Storage Bucket
 
 ## Introduction
 
@@ -44,15 +44,14 @@ In this lab, you will:
 
 	![](https://oracle-livelabs.github.io/common/images/console/storage-buckets.png " ")
 
-2.
-  <if type="freetier">
-  Select the compartment that you want to create your bucket in.
-  </if>
-  <if type="livelabs">
-  Select the compartment that you are assigned to. Expand **c4u04 (root)**, **Livelabs**, then click **your\_user\_name-COMPARTMENT**.
-  ![Select Compartment](images/select-compartment.png " ")</if>
-  Click **Create Bucket**.
-  ![](images/create-bucket.png " ")
+2.  <if type="freetier">
+    Select the compartment that you want to create your bucket in.
+    </if>
+    <if type="livelabs">
+    Select the compartment that you are assigned to. Expand **c4u04 (root)**, **Livelabs**, then click **your\_user\_name-COMPARTMENT**.
+    ![Select Compartment](images/select-compartment.png " ")</if>
+    Click **Create Bucket**.
+    ![](images/create-bucket.png " ")
 
 3. Fill out the dialog box:
 
@@ -103,14 +102,24 @@ In this lab, you will:
 9. Click **Close**.
 
 10. Open a new browser window and paste the pre-authenticated link.
+
   ![](images/open-par.png " ")
 
 11. Because this is a text file, it will open in your browser.
 
+## Task 3: Delete the resources
+
+1. Navigate back to your object storage bucket. Click the three dots and select **delete**.
+
+  ![](images/delete-bucket.png " ")
+
+2. Enter bucket name and click **Delete**.
+
+  ![](images/confirm.png " ")
 
 ## Acknowledgements
 
 - **Author** - Flavio Pereira, Larry Beausoleil
-- **Contributors** - Arabella Yao, Rajeshwari Rai, Prasenjit Sarkar
-- **Last Updated By/Date** - Richard Piantini Cid, September 2025
+- **Contributors** - Richard Piantini Cid
+- **Last Updated By/Date** - Uma Kumar , February 2026
 
