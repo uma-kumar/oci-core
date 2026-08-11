@@ -37,16 +37,16 @@ An Oracle Cloud Infrastructure VM compute instance runs on the same hardware as 
 
 1. Click the **Navigation Menu** in the upper left. Navigate to **Compute**, and select **Instances**.
 
-	![](https://oracle-livelabs.github.io/common/images/console/compute-instances.png " ")
+    ![Compute Instances page](https://oracle-livelabs.github.io/common/images/console/compute-instances.png " ")
 
 <if type="livelabs">
 2. Select the Compartment that you were assigned when the reservation was created.
 
-  ![](images/create-compute-livelabs-1.png)
+    ![Select assigned compartment](images/create-compute-livelabs-1.png)
 </if>
 
 2. Then click **Create Instance**. We will launch a VM instance for this lab.
-  ![](images/create-instance.png)
+    ![Create Instance button](images/create-instance.png)
 
 3. The Create Compute Instance wizard will launch.
     <if type="freetier">Enter **Web-Server** as the name of the server. Click **Next** to get to the **Networking** section.</if>
@@ -56,18 +56,18 @@ An Oracle Cloud Infrastructure VM compute instance runs on the same hardware as 
     ![Create step 1](images/instance-name.png " ")
     </if>
     <if type="livelabs">
-    ![](images/create-compute-livelabs-2.png)
+    ![Compute instance name field](images/create-compute-livelabs-2.png)
     </if>
 
 <if type="livelabs">
 4. Click *Change Shape* to choose a VM shape.
 
-    ![](images/create-compute-livelabs-3.png)
+    ![Change Shape option](images/create-compute-livelabs-3.png)
 
 5. Select *Specialty and previous generation*, then select **VM.Standard.2.1** as the shape, and click **Select Shape**.
 
-    ![](images/livelabs-create-compute-4.png)
-    ![](images/create-compute-livelabs-4b.png)</if>
+    ![Specialty and previous generation shape category](images/livelabs-create-compute-4.png)
+    ![VM.Standard.2.1 shape selection](images/create-compute-livelabs-4b.png)</if>
 
 3. In the Networking section, most of the defaults are perfect for our purposes. However, ensure that the **Automatically assign a public IPv4 address** option is selected.
 
@@ -75,13 +75,13 @@ An Oracle Cloud Infrastructure VM compute instance runs on the same hardware as 
     ![Create step 2](images/assign-ip.png " ")</if>
 
     <if type="livelabs">
-    ![](images/assign-ip.png)</if>
+    ![Public IPv4 assignment option](images/assign-ip.png)</if>
 
     >**Note:** You need a public IP address, so that you can SSH into the running instance later in this lab.
 
 4. Scroll down to the **Add SSH keys** area of the page. Select **Paste public keys** and paste the SSH key that you created earlier in the ***Generate SSH Keys*** Lab. Press the **Create** button to create your instance.
 
-    ![](images/ssh-keys.png)
+    ![Paste SSH public key option](images/ssh-keys.png)
 
     Launching an instance is simple and intuitive with few options to select. The provisioning of the compute instance will complete in less than a minute, and the instance state will change from *PROVISIONING* to *RUNNING*.
 
@@ -91,7 +91,7 @@ An Oracle Cloud Infrastructure VM compute instance runs on the same hardware as 
     ![Create step 3](images/public-ip.png " ")</if>
 
     <if type="livelabs">
-    ![](images/compute-livelabs-running/png)</if>
+    ![Running compute instance details](images/compute-livelabs-running.png)</if>
 
 ## Task 2: Connect to the Instance <if type="freetier">and Install Apache HTTP Server</if>
 
@@ -105,9 +105,9 @@ An Oracle Cloud Infrastructure VM compute instance runs on the same hardware as 
     <copy>ssh -i <private_ssh_key> opc@<public_ip_address></copy>
     ```
 
-    ![](images/ssh.png)
+    ![SSH connection command](images/ssh.png)
 
-<if type="freetier">    
+    <if type="freetier">
 2. For this lab, we are going to install an Apache HTTP Webserver and try to connect to it over the public Internet. *Make sure you have SSH'ed into the Linux instance* and run the following commands:
 
     >**Note:** Apache HTTP Server is an open-source web server developed by the Apache Software Foundation. The Apache server hosts web content, and responds to requests for this content from web browsers such as Chrome or Firefox.
@@ -150,7 +150,7 @@ An Oracle Cloud Infrastructure VM compute instance runs on the same hardware as 
 
 4. Click the **Navigation Menu** in the upper left. Navigate to **Networking**, and select **Virtual Cloud Networks**. Then click on the VCN name you created for this practice.
 
-	![](https://oracle-livelabs.github.io/common/images/console/networking-vcn.png " ")
+    ![Virtual Cloud Networks page](https://oracle-livelabs.github.io/common/images/console/networking-vcn.png " ")
 
 5. Now click **Security** on the top navigation bar for the VCN.
 
@@ -197,10 +197,74 @@ An Oracle Cloud Infrastructure VM compute instance runs on the same hardware as 
 2. If you cannot successfully run the `sudo` commands, please make sure you have SSH'ed into your compute instance by following Task 2 -> Step 1.
 </if>
 
+## (Optional) Task 3: Basic Instance Lifecycle (Start, Stop, and Reboot)
+
+OCI gives you full control over the power state of your compute instances. Understanding these lifecycle actions helps you manage costs and perform maintenance safely.
+
+| Action | Description |
+|--------|-------------|
+| **Stop** | Gracefully shuts down the OS and powers off the instance. OCPU and memory billing stops while the instance is stopped; boot volume storage is billed regardless. |
+| **Start** | Powers on a stopped instance and boots the OS. |
+| **Reboot** | Performs a graceful OS shutdown followed immediately by a power-on. Use this after OS-level changes such as running `sudo yum update` or modifying network configuration files. |
+| **Force stop / Force reboot** | Equivalent to pulling the power cord — the OS is given no opportunity to shut down cleanly. Use only if the instance is unresponsive to a graceful stop, as this may cause filesystem corruption or data loss if the OS was in the middle of a write operation. |
+| **Terminate** | Permanently deletes the instance. By default, the boot volume is also deleted — uncheck this option if you want to preserve it. |
+
+### Stop an Instance
+
+1. Click the **Navigation Menu** in the upper left. Navigate to **Compute**, and select **Instances**.
+
+2. Click the name of your instance (**Web-Server**) to open the instance details page.
+
+3. Click **More Actions** in the top-right area of the page and select **Stop**.
+
+    ![Stop instance menu option](images/instance-stop.png " ")
+
+4. In the confirmation dialog, click **Stop Instance**.
+
+    ![Stop instance confirmation](images/stop-confirmation.png " ")
+
+5. The instance state changes from **RUNNING** to **STOPPING**, and then to **STOPPED**. This typically takes 30–60 seconds.
+
+    ![Instance stopped](images/instance-stopped.png " ")
+
+    >**Note:** The ephemeral public IP assigned to your instance is released when the instance stops. You will not get the same IP address back when you start it again. In Task 4, you will learn how to use a reserved public IP to avoid this.
+
+### Start an Instance
+
+1. From the instance details page (state: **STOPPED**), click  **Start**.
+
+    ![Start instance menu option](images/instance-start.png " ")
+
+2. Click **Start Instance** in the confirmation dialog.
+
+3. The instance state changes from **STOPPED** to **STARTING**, and then back to **RUNNING**.
+
+    ![Instance running](images/instance-running.png " ")
+
+    >**Note:** If your instance had an ephemeral public IP before it was stopped, a new ephemeral IP has now been assigned. The address will be different from the one it had before.
+
+### Reboot an Instance
+
+1. From the instance details page (state: **RUNNING**), click **More Actions** and select **Reboot**.
+
+    ![Reboot instance menu option](images/instance-reboot.png " ")
+
+2. Click **Reboot Instance** in the confirmation dialog. OCI will issue a graceful restart command to the OS.
+
+    >**Note:** If the instance does not respond to the graceful reboot within the timeout period, select **Force reboot** to perform a hard reset. Use this only as a last resort, as it may cause data loss.
+
+    ![Reboot instance](images/instance-rebooting.png " ")
+
+3. The instance state cycles through **STOPPING** and back to **RUNNING** once the reboot is complete.
+
+
+</if>
+
+
 You have completed this lab. You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
-- **Author** - Rajeshwari Rai, Prasenjit Sarkar 
-- **Contributors** - Oracle LiveLabs QA Team (Kamryn Vinson, QA Intern, Arabella Yao, Product Manager, DB Product Management)
-- **Last Updated By/Date** - Sania Bolla, September 2025
+- **Author** - Taylor Zheng
+- **Contributors** - Rajeshwari Rai, Oracle LiveLabs QA Team (Kamryn Vinson, QA Intern, Arabella Yao, Product Manager, DB Product Management)
+- **Last Updated By/Date** - Taylor Zheng, March 2026
