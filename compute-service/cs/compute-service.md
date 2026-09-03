@@ -64,10 +64,9 @@ An Oracle Cloud Infrastructure VM compute instance runs on the same hardware as 
 
     ![Change Shape option](images/create-compute-livelabs-3.png)
 
-5. Select *Specialty and previous generation*, then select **VM.Standard.2.1** as the shape, and click **Select Shape**.
+5. Select *AMD*, then select **VM.Standard.E4.Flex** as the shape, and click **Select Shape**.
 
-    ![Specialty and previous generation shape category](images/livelabs-create-compute-4.png)
-    ![VM.Standard.2.1 shape selection](images/create-compute-livelabs-4b.png)</if>
+    ![Specialty and previous generation shape category](images/livelabs-create-compute-shape.png)</if>
 
 3. In the Networking section, most of the defaults are perfect for our purposes. However, ensure that the **Automatically assign a public IPv4 address** option is selected.
 
