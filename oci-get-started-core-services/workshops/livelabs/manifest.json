@@ -27,7 +27,7 @@
         {
             "title": "Lab 2: Create Virtual Cloud Networks",
             "type": "livelabs",
-            "filename": "../../../virtual-cloud-networks/vcn/virtual-cloud-networks.md"
+            "filename": "../../../virtual-cloud-networks/vcn/virtual-cloud-networks-livelabs.md"
         },
         {
             "title": "Lab 3: Create a Compute Service",
